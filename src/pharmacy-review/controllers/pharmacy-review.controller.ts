@@ -14,8 +14,8 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../guards/roles.guard';
-import { Roles } from '../decorators/roles.decorator';
+import { RolesGuard } from '../../guards/roles.guard';
+import { Roles } from '../../decorators/roles.decorator';
 import { IPharmacyReview } from '../interfaces/pharmacy-review.interface';
 import { CreatePharmacyReviewDto } from '../dtos/create-pharmacy-review.dto';
 import { UpdatePharmacyReviewDto } from '../dtos/update-pharmacy-review.dto';
