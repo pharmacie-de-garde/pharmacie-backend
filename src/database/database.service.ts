@@ -42,7 +42,7 @@ export class DatabaseService {
         host: this.connection.host,
         port: this.connection.port,
         name: this.connection.name,
-      }
+      },
     };
   }
 }
