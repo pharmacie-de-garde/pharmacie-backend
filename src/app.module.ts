@@ -5,6 +5,7 @@ import databaseConfig from './config/database.config';
 import {AuthModule} from './auth/auth.module';
 import {UsersModule} from './users/users.module'
 import { ErrorHandlerMiddleware } from './common/middlewares/error-handler.middleware';
+import { FavoritePharmacyModule } from './favorate_pharmacy/favorite_pharmacy.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,6 +16,7 @@ import { ErrorHandlerMiddleware } from './common/middlewares/error-handler.middl
     DatabaseModule,
     AuthModule,
     UsersModule,
+    FavoritePharmacyModule,
   ],
 })
 export class AppModule implements NestModule {
