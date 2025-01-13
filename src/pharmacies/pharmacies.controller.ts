@@ -20,7 +20,7 @@ export class PharmaciesController {
   async findById(@Param('id') id: string): Promise<Pharmacy> {
     return this.pharmaciesService.findById(id);
   }
-
+   
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateData: Partial<Pharmacy>): Promise<Pharmacy> {
     return this.pharmaciesService.update(id, updateData);
