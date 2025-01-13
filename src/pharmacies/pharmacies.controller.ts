@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, Query } from '@nestjs/common';
 import { PharmaciesService } from './pharmacies.service';
 import { Pharmacy } from './schemas/pharmacy.schema';
+import { Types } from 'mongoose';
 
 @Controller('pharmacies')
 export class PharmaciesController {
@@ -17,7 +18,7 @@ export class PharmaciesController {
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<Pharmacy> {
+  async findById(@Param('id') id: Types.ObjectId): Promise<Pharmacy> {
     return this.pharmaciesService.findById(id);
   }
    

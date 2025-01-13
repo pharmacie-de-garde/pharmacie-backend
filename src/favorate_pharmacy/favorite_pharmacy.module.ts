@@ -4,9 +4,13 @@ import { FavoritePharmacy, FavoritePharmacySchema } from './favorite_pharnacy.sc
 import { FavoritePharmacyController } from './favorite_pharnacy.controller';
 import { FavoritePharmacyService } from './favorite_pharnacy.service';
 import { FavoritePharmacyRepository } from './favorite_pharnacy.repository';
+import { PharmaciesModule } from 'src/pharmacies/pharmacies.module';
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: FavoritePharmacy.name, schema: FavoritePharmacySchema }])],
+    imports: [
+        MongooseModule.forFeature([{ name: FavoritePharmacy.name, schema: FavoritePharmacySchema }]),
+        PharmaciesModule
+    ],
     controllers: [FavoritePharmacyController],
     providers: [
         {
@@ -16,7 +20,7 @@ import { FavoritePharmacyRepository } from './favorite_pharnacy.repository';
         {
             provide: 'FavoritePharmacyRepositoryInterface',
             useClass: FavoritePharmacyRepository
-        }
+        },
     ],
 })
 export class FavoritePharmacyModule { }

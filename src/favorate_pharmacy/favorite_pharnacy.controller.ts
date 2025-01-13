@@ -1,13 +1,14 @@
-import { BadRequestException, Body, Controller, HttpException, HttpStatus, Post, UsePipes, ValidationPipe } from "@nestjs/common";
+import { BadRequestException, Body, Controller, HttpException, HttpStatus, Inject, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 import { CreateFavoritePharmacyDTO } from "./dto/create.favorite.pharmacy.dto";
-import { FavoritePharmacyService } from "./favorite_pharnacy.service";
 import { CreateFavoritePharmacyResponseDTO } from "./dto/create.favorite.pharmacy.response.dto";
+import mongoose from "mongoose";
+import { FavoritePharmacyServiceInterface } from "./interfaces/favorite_pharmacy.service.interface";
 
 @Controller('favorite')
 export class FavoritePharmacyController {
 
     constructor(
-        private readonly favoritePharmacyService: FavoritePharmacyService
+        @Inject('FavoritePharmacyServiceInterface') private readonly favoritePharmacyService: FavoritePharmacyServiceInterface
     ){}
 
     @Post('/create')
@@ -26,7 +27,8 @@ export class FavoritePharmacyController {
         @Body() createFavoritePharnacyDTO: CreateFavoritePharmacyDTO
     ): Promise<CreateFavoritePharmacyResponseDTO> {
         try{
-            const favoritePharmacy = await this.favoritePharmacyService.handelCreateFavoritePharmacy(createFavoritePharnacyDTO)
+            const userId = new mongoose.Types.ObjectId('674ba1315bbead3ecff62996')
+            const favoritePharmacy = await this.favoritePharmacyService.handelCreateFavoritePharmacy(createFavoritePharnacyDTO, userId)
             return {
                 statusCode: HttpStatus.CREATED,
                 message: 'Favorite Pharmacy Created Successfully',
