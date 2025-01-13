@@ -1,9 +1,11 @@
+
 import { Module , NestModule, MiddlewareConsumer} from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import {AuthModule} from './auth/auth.module';
 import {UsersModule} from './users/users.module'
+import { PharmaciesModule } from './pharmacies/pharmacies.module';
 import { ErrorHandlerMiddleware } from './common/middlewares/error-handler.middleware';
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import { ErrorHandlerMiddleware } from './common/middlewares/error-handler.middl
     DatabaseModule,
     AuthModule,
     UsersModule,
+     PharmaciesModule,
   ],
 })
 export class AppModule implements NestModule {
