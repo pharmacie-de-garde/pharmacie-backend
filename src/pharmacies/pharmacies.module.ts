@@ -7,9 +7,10 @@ import { Pharmacy, PharmacySchema } from './schemas/pharmacy.schema';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pharmacy.name, schema: PharmacySchema }]),
-    MongooseModule.forRoot('mongodb://localhost:27017/pharmacy-db')
+    // MongooseModule.forRoot('mongodb://localhost:27017/pharmacy')
   ],
   controllers: [PharmaciesController],
   providers: [PharmaciesService],
+  exports: [PharmaciesService]
 })
 export class PharmaciesModule {}

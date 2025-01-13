@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Pharmacy } from './schemas/pharmacy.schema';
 
 @Injectable()
@@ -20,8 +20,8 @@ export class PharmaciesService {
   }
 
   // Get a pharmacy by ID
-  async findById(id: string): Promise<Pharmacy> {
-    return this.pharmacyModel.findById(id).exec();
+  async findById(id: Types.ObjectId): Promise<Pharmacy> {
+    return this.pharmacyModel.findById({ _id: id }).exec();
   }
 
   // Update a pharmacy
