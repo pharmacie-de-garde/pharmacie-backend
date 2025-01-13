@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Put, Body, Param, Query, NotFoundException} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Body,
+  Param,
+  Query,
+  NotFoundException,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../providers/user.service';
 import { CreateUserDto } from '../dtos/create-user.dto';
@@ -36,7 +45,10 @@ export class UsersController {
     type: User,
   })
   @ApiResponse({ status: 404, description: 'User not found.' })
-  async updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async updateUser(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     return this.userService.updateUser(id, updateUserDto);
   }
 
@@ -81,6 +93,4 @@ export class UsersController {
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
-
-
 }

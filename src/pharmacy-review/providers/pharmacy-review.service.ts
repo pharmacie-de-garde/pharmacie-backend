@@ -1,5 +1,5 @@
 // providers/pharmacy-review.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { PharmacyReview } from '../schemas/pharmacy-review.schema';
 import { IPharmacyReview } from '../interfaces/pharmacy-review.interface';
 import { IPharmacyReviewRepository } from '../interfaces/pharmacy-review.repository.interface';
@@ -8,7 +8,10 @@ import { UpdatePharmacyReviewDto } from '../dtos/update-pharmacy-review.dto';
 
 @Injectable()
 export class PharmacyReviewService implements IPharmacyReview {
-  constructor(private readonly reviewRepository: IPharmacyReviewRepository) {}
+  constructor(
+    @Inject('IPharmacyReviewRepository')
+    private readonly reviewRepository: IPharmacyReviewRepository,
+  ) {}
 
   async getAllReviews(filters: {
     isApproved?: boolean;

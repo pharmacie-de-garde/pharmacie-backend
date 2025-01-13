@@ -5,7 +5,11 @@ import { ProfileService } from './profile.service';
 import { User } from '../schemas/user.schema';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
-import { UserNotFoundException, UserAlreadyExistsException, InvalidCredentialsException } from '../exceptions/user.exceptions';
+import {
+  UserNotFoundException,
+  UserAlreadyExistsException,
+  InvalidCredentialsException,
+} from '../exceptions/user.exceptions';
 import * as bcrypt from 'bcryptjs';
 import { Types } from 'mongoose';
 @Injectable()
@@ -79,7 +83,10 @@ export class UserService implements IUserService {
    * @throws UserAlreadyExistsException if new email/username already exists
    * @returns Promise containing the updated user
    */
-  async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
+  async updateUser(
+    userId: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
     const existingUser = await this.validateExistingUser(userId);
     await this.validateUniqueConstraints(existingUser, updateUserDto);
 
@@ -87,9 +94,6 @@ export class UserService implements IUserService {
     this.validateUserExists(updatedUser);
     return updatedUser;
   }
-
-
-
 
   async validateCredentials(email: string, password: string): Promise<User> {
     const user = await this.userRepository.findByCredentials(email);
@@ -119,13 +123,14 @@ export class UserService implements IUserService {
    * @returns Promise containing the created user
    * @private
    */
-  private async createUserWithProfile(createUserDto: CreateUserDto): Promise<User> {
+  private async createUserWithProfile(
+    createUserDto: CreateUserDto,
+  ): Promise<User> {
     const hashedPassword = await this.hashPassword(createUserDto.password);
 
     const user = await this.userRepository.create({
       ...createUserDto,
       password: hashedPassword,
-
     });
 
     await this.profileService.createProfile({
@@ -143,7 +148,10 @@ export class UserService implements IUserService {
    * @throws UserAlreadyExistsException if either exists
    * @private
    */
-  private async validateUniqueUser(email: string, username: string): Promise<void> {
+  private async validateUniqueUser(
+    email: string,
+    username: string,
+  ): Promise<void> {
     const exists = await this.userRepository.exists(email, username);
     if (exists) {
       throw new UserAlreadyExistsException();
@@ -168,12 +176,18 @@ export class UserService implements IUserService {
    * @throws UserAlreadyExistsException if constraints violated
    * @private
    */
-  private async validateUniqueConstraints(existingUser: User, updateUserDto: UpdateUserDto): Promise<void> {
+  private async validateUniqueConstraints(
+    existingUser: User,
+    updateUserDto: UpdateUserDto,
+  ): Promise<void> {
     if (!updateUserDto.email && !updateUserDto.username) {
       return;
     }
 
-    const exists = await this.userRepository.exists(updateUserDto.email || existingUser.email, updateUserDto.username || existingUser.username);
+    const exists = await this.userRepository.exists(
+      updateUserDto.email || existingUser.email,
+      updateUserDto.username || existingUser.username,
+    );
 
     if (exists) {
       throw new UserAlreadyExistsException();
@@ -209,7 +223,10 @@ export class UserService implements IUserService {
    * @returns Promise containing boolean indicating if password is valid
    * @private
    */
-  private async verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
+  private async verifyPassword(
+    password: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
   }
 }

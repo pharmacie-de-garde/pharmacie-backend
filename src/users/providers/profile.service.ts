@@ -29,7 +29,9 @@ export class ProfileService implements IProfileService {
    * @param createProfileDto - Profile data to create + user ID
    * @returns The created profile with default parameters (theme: 'light', isBlocked: false)
    */
-  async createProfile(createProfileDto: CreateProfileDto & { userId: string }): Promise<Profile> {
+  async createProfile(
+    createProfileDto: CreateProfileDto & { userId: string },
+  ): Promise<Profile> {
     return this.profileRepository.create({
       ...createProfileDto,
       theme: 'light',
@@ -43,16 +45,20 @@ export class ProfileService implements IProfileService {
    * @throws ProfileNotFoundException if the profile doesn't exist
    * @returns The updated profile
    */
-  async updateProfile(userId: string, updateProfileDto: UpdateProfileDto): Promise<Profile> {
+  async updateProfile(
+    userId: string,
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<Profile> {
     const existingProfile = await this.profileRepository.findByUserId(userId);
     if (!existingProfile) {
       throw new ProfileNotFoundException();
     }
 
-    const updatedProfile = await this.profileRepository.update(userId, updateProfileDto);
+    const updatedProfile = await this.profileRepository.update(
+      userId,
+      updateProfileDto,
+    );
 
     return updatedProfile;
   }
-
-
 }

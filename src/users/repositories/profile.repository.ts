@@ -16,12 +16,17 @@ export class ProfileRepository implements IProfileRepository {
     return this.profileModel.findOne({ userId }).exec();
   }
 
-  async create(createProfileDto: CreateProfileDto & { userId: string }): Promise<Profile> {
+  async create(
+    createProfileDto: CreateProfileDto & { userId: string },
+  ): Promise<Profile> {
     const profile = new this.profileModel(createProfileDto);
     return profile.save();
   }
 
-  async update(userId: string, updateProfileDto: UpdateProfileDto): Promise<Profile | null> {
+  async update(
+    userId: string,
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<Profile | null> {
     return this.profileModel
       .findOneAndUpdate(
         { userId: userId },
@@ -32,6 +37,4 @@ export class ProfileRepository implements IProfileRepository {
       )
       .exec();
   }
-
-
 }

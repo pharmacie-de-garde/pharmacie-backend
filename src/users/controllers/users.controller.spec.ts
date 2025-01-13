@@ -17,7 +17,6 @@ describe('UsersController', () => {
     findByEmail: jest.fn(),
     findByUsername: jest.fn(),
     findById: jest.fn(),
-   
   };
 
   const completeUser: Partial<User> = {
@@ -25,7 +24,6 @@ describe('UsersController', () => {
     username: 'John Doe',
     email: 'john@example.com',
     password: 'hashedPassword',
-  
   };
 
   beforeEach(async () => {
@@ -128,10 +126,10 @@ describe('UsersController', () => {
     it('should throw NotFoundException if user not found', async () => {
       userService.findById.mockResolvedValue(null);
 
-      await expect(controller.getUserById('1')).rejects.toThrow(NotFoundException);
+      await expect(controller.getUserById('1')).rejects.toThrow(
+        NotFoundException,
+      );
       expect(userService.findById).toHaveBeenCalledWith('1');
     });
   });
-
-
 });

@@ -1,45 +1,44 @@
-// http/pharmacy-review.http
-### Get all reviews (Admin only)
-GET {{baseUrl}}/pharmacy-reviews
-Authorization: Bearer {{adminToken}}
+# ### Get all reviews (Admin only)
+# GET {{baseUrl}}/pharmacy-reviews
+# Authorization: Bearer {{adminToken}}
 
-### Get pharmacy reviews
-GET {{baseUrl}}/pharmacy-reviews/pharmacy/{{pharmacyId}}
-Authorization: Bearer {{token}}
+# ### Get pharmacy reviews
+# GET {{baseUrl}}/pharmacy-reviews/pharmacy/{{pharmacyId}}
+# Authorization: Bearer {{token}}
 
-### Create new review
-POST {{baseUrl}}/pharmacy-reviews
-Authorization: Bearer {{token}}
-Content-Type: application/json
+# ### Create new review
+# POST {{baseUrl}}/pharmacy-reviews
+# Authorization: Bearer {{token}}
+# Content-Type: application/json
 
-{
-  "pharmacyId": "{{pharmacyId}}",
-  "rating": 4,
-  "comment": "Great service and friendly staff"
-}
+# {
+#   "pharmacyId": "{{pharmacyId}}",
+#   "rating": 4,
+#   "comment": "Great service and friendly staff"
+# }
 
-### Update review (Admin only)
-PUT {{baseUrl}}/pharmacy-reviews/{{reviewId}}
-Authorization: Bearer {{adminToken}}
-Content-Type: application/json
+# ### Update review (Admin only)
+# PUT {{baseUrl}}/pharmacy-reviews/{{reviewId}}
+# Authorization: Bearer {{adminToken}}
+# Content-Type: application/json
 
-{
-  "isApproved": true
-}
+# {
+#   "isApproved": true
+# }
 
-### Delete review (Admin only)
-DELETE {{baseUrl}}/pharmacy-reviews/{{reviewId}}
-Authorization: Bearer {{adminToken}}
+# ### Delete review (Admin only)
+# DELETE {{baseUrl}}/pharmacy-reviews/{{reviewId}}
+# Authorization: Bearer {{adminToken}}
 
-### Report review
-POST {{baseUrl}}/pharmacy-reviews/{{reviewId}}/report
-Authorization: Bearer {{token}}
-Content-Type: application/json
+# ### Report review
+# POST {{baseUrl}}/pharmacy-reviews/{{reviewId}}/report
+# Authorization: Bearer {{token}}
+# Content-Type: application/json
 
-{
-  "reason": "Inappropriate content"
-}
+# {
+#   "reason": "Inappropriate content"
+# }
 
-### Approve review (Admin only)
-PUT {{baseUrl}}/pharmacy-reviews/{{reviewId}}/approve
-Authorization: Bearer {{adminToken}}
+# ### Approve review (Admin only)
+# PUT {{baseUrl}}/pharmacy-reviews/{{reviewId}}/approve
+# Authorization: Bearer {{adminToken}}
