@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Pharmacy } from './schemas/pharmacy.schema';
@@ -21,7 +21,11 @@ export class PharmaciesService {
 
   // Get a pharmacy by ID
   async findById(id: Types.ObjectId): Promise<Pharmacy> {
-    return this.pharmacyModel.findById({ _id: id }).exec();
+    const pharmacies = await this.pharmacyModel.findById({ _id: id }).exec();
+    if(!pharmacies){
+      throw new HttpException('Pharmacy not found', HttpStatus.NOT_FOUND);
+    }
+    return pharmacies;
   }
 
   // Update a pharmacy
