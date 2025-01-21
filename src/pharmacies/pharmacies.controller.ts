@@ -48,7 +48,6 @@ export class PharmaciesController {
       );
     }
   }
-  
 
   @Put(':id')
   async update(
