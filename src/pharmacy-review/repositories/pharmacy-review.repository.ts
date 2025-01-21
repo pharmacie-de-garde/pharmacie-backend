@@ -18,7 +18,7 @@ export class PharmacyReviewRepository implements IPharmacyReviewRepository {
   ): Promise<PharmacyReview[]> {
     return this.reviewModel
       .find(filters)
-      .populate('userId', 'name email')
+      .populate('userId', 'username email')
       .populate('pharmacyId', 'name address')
       .sort({ createdAt: -1 })
       .exec();

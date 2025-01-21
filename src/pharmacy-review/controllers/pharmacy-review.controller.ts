@@ -3,6 +3,7 @@ import {
   Post,
   Get,
   Param,
+  Query,
   Body,
   HttpCode,
   HttpStatus,
@@ -17,9 +18,10 @@ export class PharmacyReviewController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async getAllReviews(filters: {
-    isReported?: boolean;
-  }): Promise<PharmacyReview[]> {
+  async getAllReviews(
+    @Query() filters: { isReported?: boolean },
+  ): Promise<PharmacyReview[]> {
+    console.log('filters', filters);
     return this.pharmacyReviewService.getAllReviews(filters);
   }
 
