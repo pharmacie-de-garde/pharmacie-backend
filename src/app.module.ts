@@ -9,7 +9,8 @@ import { UsersModule } from './users/users.module';
 import { ErrorHandlerMiddleware } from './common/middlewares/error-handler.middleware';
 import { PharmacyReviewModule } from './pharmacy-review/pharmacy-review.module';
 import { MongooseModule } from '@nestjs/mongoose';
-
+import { PharmaciesModule } from './pharmacies/pharmacies.module';
+import { FavoritePharmacyModule } from './favorate_pharmacy/favorite_pharmacy.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,6 +23,8 @@ import { MongooseModule } from '@nestjs/mongoose';
     AuthModule,
     UsersModule,
     MongooseModule.forRoot('mongodb://localhost/nest'),
+    FavoritePharmacyModule,
+    PharmaciesModule,
   ],
 
   controllers: [AppController],
