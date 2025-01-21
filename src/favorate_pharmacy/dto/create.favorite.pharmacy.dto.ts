@@ -1,8 +1,8 @@
-import { IsMongoId, IsNotEmpty } from "class-validator";
-import { Types } from "mongoose";
+import { IsMongoId, IsNotEmpty } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateFavoritePharmacyDTO {
-    @IsNotEmpty()
-    @IsMongoId()
-    pharmacy_id: Types.ObjectId
+  @IsNotEmpty()
+  @IsMongoId()
+  pharmacy_id: Types.ObjectId;
 }

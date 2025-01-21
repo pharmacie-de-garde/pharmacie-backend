@@ -1,21 +1,36 @@
 import {
   Controller,
   Post,
-  Put,
+  Get,
   Param,
   Body,
   HttpCode,
   HttpStatus,
-  UseGuards,
 } from '@nestjs/common';
 import { PharmacyReviewService } from '../providers/pharmacy-review.service';
 import { PharmacyReview } from '../schemas/pharmacy-review.schema';
-import { Roles } from '../../common/decorators/roles.decorator';
-import { RolesGuard } from '../../common/guards/roles.guard';
+import { CreatePharmacyReviewDto } from '../dtos/create-pharmacy-review.dto';
 
 @Controller('pharmacy-review')
 export class PharmacyReviewController {
   constructor(private readonly pharmacyReviewService: PharmacyReviewService) {}
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  async getAllReviews(filters: {
+    isReported?: boolean;
+  }): Promise<PharmacyReview[]> {
+    return this.pharmacyReviewService.getAllReviews(filters);
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  async createReview(
+    @Body('userId') userId: string,
+    @Body() createReviewDto: CreatePharmacyReviewDto,
+  ): Promise<PharmacyReview> {
+    return this.pharmacyReviewService.createReview(userId, createReviewDto);
+  }
 
   @Post(':id/report')
   @HttpCode(HttpStatus.OK)
@@ -24,13 +39,5 @@ export class PharmacyReviewController {
     @Body('reason') reason: string,
   ): Promise<PharmacyReview> {
     return this.pharmacyReviewService.reportReview(id, reason);
-  }
-
-  @Put(':id/approve')
-  @Roles('admin')
-  @UseGuards(RolesGuard)
-  @HttpCode(HttpStatus.OK)
-  async approveReview(@Param('id') id: string): Promise<PharmacyReview> {
-    return this.pharmacyReviewService.approveReview(id);
   }
 }

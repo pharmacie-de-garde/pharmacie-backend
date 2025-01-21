@@ -1,3 +1,10 @@
+@baseUrl = http://localhost:3000
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjYwZjQwYjQwYjQ0MjIzYjQ0MjI0ZjciLCJ1c2VybmFtZSI6InNvaGVlbm5lZWViIiwiaWF0IjoxNjI0NjYwNjY4LCJleHAiOjE2MjQ2NjQyNjh9.1
+
+@pharmacyId = 678ea63c01d1a8ee1efe98d1
+@userId = 678ea3a10a2274571539d26d
+
 # ### Get all reviews (Admin only)
 # GET {{baseUrl}}/pharmacy-reviews
 # Authorization: Bearer {{adminToken}}
@@ -7,15 +14,16 @@
 # Authorization: Bearer {{token}}
 
 # ### Create new review
-# POST {{baseUrl}}/pharmacy-reviews
-# Authorization: Bearer {{token}}
-# Content-Type: application/json
+POST {{baseUrl}}/pharmacy-review
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
-# {
-#   "pharmacyId": "{{pharmacyId}}",
-#   "rating": 4,
-#   "comment": "Great service and friendly staff"
-# }
+{
+  "pharmacyId": "{{pharmacyId}}",
+  "userId": "{{userId}}",
+  "rating": 4,
+  "comment": "Great service and friendly staff"
+}
 
 # ### Update review (Admin only)
 # PUT {{baseUrl}}/pharmacy-reviews/{{reviewId}}

@@ -3,10 +3,7 @@ import { CreatePharmacyReviewDto } from '../dtos/create-pharmacy-review.dto';
 import { UpdatePharmacyReviewDto } from '../dtos/update-pharmacy-review.dto';
 
 export interface IPharmacyReviewRepository {
-  findAll(filters?: {
-    isApproved?: boolean;
-    isReported?: boolean;
-  }): Promise<PharmacyReview[]>;
+  findAll(filters?: { isReported?: boolean }): Promise<PharmacyReview[]>;
   findById(id: string): Promise<PharmacyReview | null>;
   findByPharmacy(
     pharmacyId: string,
@@ -23,9 +20,5 @@ export interface IPharmacyReviewRepository {
   updateReportStatus(
     id: string,
     reason: string,
-  ): Promise<PharmacyReview | null>;
-  updateApprovalStatus(
-    id: string,
-    isApproved: boolean,
   ): Promise<PharmacyReview | null>;
 }

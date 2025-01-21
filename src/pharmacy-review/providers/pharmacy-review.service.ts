@@ -14,7 +14,6 @@ export class PharmacyReviewService implements IPharmacyReview {
   ) {}
 
   async getAllReviews(filters: {
-    isApproved?: boolean;
     isReported?: boolean;
   }): Promise<PharmacyReview[]> {
     return this.reviewRepository.findAll(filters);
@@ -59,17 +58,6 @@ export class PharmacyReviewService implements IPharmacyReview {
     const review = await this.reviewRepository.updateReportStatus(
       reviewId,
       reason,
-    );
-    if (!review) {
-      throw new NotFoundException(`Review #${reviewId} not found`);
-    }
-    return review;
-  }
-
-  async approveReview(reviewId: string): Promise<PharmacyReview> {
-    const review = await this.reviewRepository.updateApprovalStatus(
-      reviewId,
-      true,
     );
     if (!review) {
       throw new NotFoundException(`Review #${reviewId} not found`);

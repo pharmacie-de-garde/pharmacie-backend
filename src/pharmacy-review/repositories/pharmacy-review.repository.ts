@@ -14,7 +14,7 @@ export class PharmacyReviewRepository implements IPharmacyReviewRepository {
   ) {}
 
   async findAll(
-    filters: { isApproved?: boolean; isReported?: boolean } = {},
+    filters: { isReported?: boolean } = {},
   ): Promise<PharmacyReview[]> {
     return this.reviewModel
       .find(filters)
@@ -85,23 +85,6 @@ export class PharmacyReviewRepository implements IPharmacyReviewRepository {
         {
           isReported: true,
           reportReason: reason,
-        },
-        { new: true },
-      )
-      .exec();
-  }
-
-  async updateApprovalStatus(
-    id: string,
-    isApproved: boolean,
-  ): Promise<PharmacyReview | null> {
-    return this.reviewModel
-      .findByIdAndUpdate(
-        id,
-        {
-          isApproved,
-          isReported: false,
-          reportReason: null,
         },
         { new: true },
       )

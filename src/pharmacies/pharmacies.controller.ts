@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, Query, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+  Query,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { PharmaciesService } from './pharmacies.service';
 import { Pharmacy } from './schemas/pharmacy.schema';
 import { Types } from 'mongoose';
@@ -6,7 +17,7 @@ import { ObjectIdTransformer } from 'src/common/transformers/object_id.transform
 
 @Controller('pharmacies')
 export class PharmaciesController {
-  constructor(private readonly pharmaciesService: PharmaciesService) { }
+  constructor(private readonly pharmaciesService: PharmaciesService) {}
 
   @Post()
   async create(@Body() pharmacy: Partial<Pharmacy>): Promise<Pharmacy> {
@@ -22,18 +33,27 @@ export class PharmaciesController {
   async findById(@Param('id') id: string): Promise<Pharmacy> {
     try {
       const objectId = ObjectIdTransformer.toObjectId(id);
-      const pharmacies = await this.pharmaciesService.findById(objectId); 
-      return pharmacies
-    } catch (err: any) {      
-      if(err instanceof HttpException){
-        throw new HttpException({ message: err.getResponse()}, err.getStatus());
+      const pharmacies = await this.pharmaciesService.findById(objectId);
+      return pharmacies;
+    } catch (err: any) {
+      if (err instanceof HttpException) {
+        throw new HttpException(
+          { message: err.getResponse() },
+          err.getStatus(),
+        );
       }
-      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateData: Partial<Pharmacy>): Promise<Pharmacy> {
+  async update(
+    @Param('id') id: string,
+    @Body() updateData: Partial<Pharmacy>,
+  ): Promise<Pharmacy> {
     return this.pharmaciesService.update(id, updateData);
   }
 

@@ -4,10 +4,7 @@ import { CreatePharmacyReviewDto } from '../dtos/create-pharmacy-review.dto';
 import { UpdatePharmacyReviewDto } from '../dtos/update-pharmacy-review.dto';
 
 export interface IPharmacyReview {
-  getAllReviews(filters: {
-    isApproved?: boolean;
-    isReported?: boolean;
-  }): Promise<PharmacyReview[]>;
+  getAllReviews(filters: { isReported?: boolean }): Promise<PharmacyReview[]>;
   getPharmacyReviews(pharmacyId: string): Promise<PharmacyReview[]>;
   createReview(
     userId: string,
@@ -19,5 +16,4 @@ export interface IPharmacyReview {
   ): Promise<PharmacyReview>;
   deleteReview(reviewId: string): Promise<void>;
   reportReview(reviewId: string, reason: string): Promise<PharmacyReview>;
-  approveReview(reviewId: string): Promise<PharmacyReview>;
 }

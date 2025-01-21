@@ -18,9 +18,6 @@ export class PharmacyReview {
   comment: string;
 
   @Prop({ default: false })
-  isApproved: boolean;
-
-  @Prop({ default: false })
   isReported: boolean;
 
   @Prop({ type: String, default: null })
