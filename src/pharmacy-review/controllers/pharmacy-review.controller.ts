@@ -7,6 +7,7 @@ import {
   Body,
   HttpCode,
   HttpStatus,
+  Delete,
 } from '@nestjs/common';
 import { PharmacyReviewService } from '../providers/pharmacy-review.service';
 import { PharmacyReview } from '../schemas/pharmacy-review.schema';
@@ -32,6 +33,12 @@ export class PharmacyReviewController {
     @Body() createReviewDto: CreatePharmacyReviewDto,
   ): Promise<PharmacyReview> {
     return this.pharmacyReviewService.createReview(userId, createReviewDto);
+  }
+
+  @Delete(':id')
+  async deleteReview(@Param('id') id: string): Promise<void> {
+    console.log('id', id);
+    return this.pharmacyReviewService.deleteReview(id);
   }
 
   @Post(':id/report')
