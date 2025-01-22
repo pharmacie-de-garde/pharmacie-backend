@@ -3,6 +3,7 @@ import { CreateFavoritePharmacyDTO } from "./dto/create.favorite.pharmacy.dto";
 import { CreateFavoritePharmacyResponseDTO } from "./dto/create.favorite.pharmacy.response.dto";
 import mongoose from "mongoose";
 import { FavoritePharmacyServiceInterface } from "./interfaces/favorite_pharmacy.service.interface";
+import { ObjectIdTransformer } from "src/common/transformers/object_id.transformer";
 
 @Controller('favorite')
 export class FavoritePharmacyController {
@@ -26,8 +27,9 @@ export class FavoritePharmacyController {
     async createFavoritePharmacy(
         @Body() createFavoritePharnacyDTO: CreateFavoritePharmacyDTO
     ): Promise<CreateFavoritePharmacyResponseDTO> {
-        try{
+        try{            
             const userId = new mongoose.Types.ObjectId('674ba1315bbead3ecff62996')
+            createFavoritePharnacyDTO.pharmacy_id = ObjectIdTransformer.toObjectId(createFavoritePharnacyDTO.pharmacy_id);
             const favoritePharmacy = await this.favoritePharmacyService.handelCreateFavoritePharmacy(createFavoritePharnacyDTO, userId)
             return {
                 statusCode: HttpStatus.CREATED,
