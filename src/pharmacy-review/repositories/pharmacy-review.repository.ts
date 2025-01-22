@@ -27,7 +27,7 @@ export class PharmacyReviewRepository implements IPharmacyReviewRepository {
   async findById(id: string): Promise<PharmacyReview | null> {
     return this.reviewModel
       .findById(id)
-      .populate('userId', 'name email')
+      .populate('userId', 'username email')
       .populate('pharmacyId', 'name address')
       .exec();
   }
@@ -41,7 +41,7 @@ export class PharmacyReviewRepository implements IPharmacyReviewRepository {
         pharmacyId: new Types.ObjectId(pharmacyId),
         isApproved: approved,
       })
-      .populate('userId', 'name')
+      .populate('userId', 'username')
       .sort({ createdAt: -1 })
       .exec();
   }
@@ -63,7 +63,7 @@ export class PharmacyReviewRepository implements IPharmacyReviewRepository {
   ): Promise<PharmacyReview | null> {
     return this.reviewModel
       .findByIdAndUpdate(id, updateData, { new: true })
-      .populate('userId', 'name email')
+      .populate('userId', 'username email')
       .populate('pharmacyId', 'name address')
       .exec();
   }
