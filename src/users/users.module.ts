@@ -16,3 +16,4 @@ import { ProfileRepository } from './repositories/profile.repository';
   exports: [UserService],
 })
 export class UsersModule {}
+  
