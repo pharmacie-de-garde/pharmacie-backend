@@ -19,7 +19,6 @@ export class Profile extends Document {
 
   @Prop({ required: false })
   bio?: string;
-
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);

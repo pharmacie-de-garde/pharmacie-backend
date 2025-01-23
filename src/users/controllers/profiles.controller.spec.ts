@@ -44,11 +44,15 @@ describe('ProfilesController', () => {
 
   describe('getProfileByUserId', () => {
     it('should return profile for given user id', async () => {
-      profileService.findProfileByUserId.mockResolvedValue(TEST_PROFILE as unknown as Profile);
+      profileService.findProfileByUserId.mockResolvedValue(
+        TEST_PROFILE as unknown as Profile,
+      );
 
       const result = await controller.getProfileByUserId(TEST_USER_ID);
 
-      expect(profileService.findProfileByUserId).toHaveBeenCalledWith(TEST_USER_ID);
+      expect(profileService.findProfileByUserId).toHaveBeenCalledWith(
+        TEST_USER_ID,
+      );
       expect(result).toEqual(TEST_PROFILE);
     });
   });
@@ -66,12 +70,16 @@ describe('ProfilesController', () => {
       } as unknown as Profile;
       profileService.updateProfile.mockResolvedValue(updatedProfile);
 
-      const result = await controller.updateProfile(TEST_USER_ID, updateProfileDto);
+      const result = await controller.updateProfile(
+        TEST_USER_ID,
+        updateProfileDto,
+      );
 
-      expect(profileService.updateProfile).toHaveBeenCalledWith(TEST_USER_ID, updateProfileDto);
+      expect(profileService.updateProfile).toHaveBeenCalledWith(
+        TEST_USER_ID,
+        updateProfileDto,
+      );
       expect(result).toEqual(updatedProfile);
     });
   });
-
-
 });

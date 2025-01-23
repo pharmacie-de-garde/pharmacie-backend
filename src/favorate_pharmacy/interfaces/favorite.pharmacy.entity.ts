@@ -1,7 +1,7 @@
 export interface FavoritePharmacyEntity {
-    id: string;
-    pharmacyId: string;
-    userId: string;
-    createdAt: string;
-    updatedAt: string;
+  id: string;
+  pharmacyId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
 }

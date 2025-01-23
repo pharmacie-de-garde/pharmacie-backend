@@ -5,16 +5,13 @@ import { Request, Response, NextFunction } from 'express';
 export class ErrorHandlerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     try {
-     
       next();
     } catch (error) {
-     
       this.handleError(error, res);
     }
   }
 
   private handleError(error: any, res: Response) {
-  
     console.error('An error occurred:', error);
 
     if (error.status && error.message) {

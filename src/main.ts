@@ -6,15 +6,15 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-    // Configure CORS
-    app.enableCors({
-      origin: '*', 
-      methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-      credentials: true, 
-    });
+  // Configure CORS
+  app.enableCors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials: true,
+  });
 
-  app.useGlobalFilters(new HttpExceptionFilter())
-  app.useGlobalInterceptors(new LoggingInterceptor())
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   await app.listen(process.env.PORT ?? 3000);
 }

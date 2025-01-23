@@ -10,10 +10,12 @@ import { UserRepository } from './repositories/user.repository';
 import { ProfileRepository } from './repositories/profile.repository';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), MongooseModule.forFeature([{ name: Profile.name, schema: ProfileSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: Profile.name, schema: ProfileSchema }]),
+  ],
   controllers: [UsersController, ProfilesController],
   providers: [UserService, ProfileService, UserRepository, ProfileRepository],
   exports: [UserService],
 })
 export class UsersModule {}
-  

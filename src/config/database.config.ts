@@ -6,6 +6,6 @@ export default registerAs('database', () => ({
     dbName: process.env.DATABASE_NAME || 'pharmacy',
     autoIndex: true,
     serverSelectionTimeoutMS: 5000,
-    family: 4
-  }
+    family: 4,
+  },
 }));

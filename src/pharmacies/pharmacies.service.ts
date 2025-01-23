@@ -22,7 +22,7 @@ export class PharmaciesService {
   // Get a pharmacy by ID
   async findById(id: Types.ObjectId): Promise<Pharmacy> {
     const pharmacies = await this.pharmacyModel.findById({ _id: id }).exec();
-    if(!pharmacies){
+    if (!pharmacies) {
       throw new HttpException('Pharmacy not found', HttpStatus.NOT_FOUND);
     }
     return pharmacies;
@@ -30,7 +30,9 @@ export class PharmaciesService {
 
   // Update a pharmacy
   async update(id: string, updateData: Partial<Pharmacy>): Promise<Pharmacy> {
-    return this.pharmacyModel.findByIdAndUpdate(id, updateData, { new: true }).exec();
+    return this.pharmacyModel
+      .findByIdAndUpdate(id, updateData, { new: true })
+      .exec();
   }
 
   // Delete a pharmacy
@@ -39,7 +41,11 @@ export class PharmaciesService {
   }
 
   // Find pharmacies near a location (geospatial query)
-  async findNearby(longitude: number, latitude: number, distanceInMeters: number): Promise<Pharmacy[]> {
+  async findNearby(
+    longitude: number,
+    latitude: number,
+    distanceInMeters: number,
+  ): Promise<Pharmacy[]> {
     return this.pharmacyModel
       .find({
         location: {

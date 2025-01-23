@@ -18,7 +18,7 @@ export class Pharmacy extends Document {
     },
     coordinates: {
       type: [Number],
-      required: true, 
+      required: true,
     },
   })
   location: {

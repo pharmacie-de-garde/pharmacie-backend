@@ -10,18 +10,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const exceptionResponse = exception.getResponse();
     let message = exceptionResponse?.message;
-    if (typeof message === 'object') {      
+    if (typeof message === 'object') {
       message = message[0].constraint;
-    }    
-    response
-      .status(status)
-      .json(
-        {
-          statusCode: status,
-          timestamp: new Date().toISOString(),
-          path: request.url,
-          error: message
-        }
-      )
+    }
+    response.status(status).json({
+      statusCode: status,
+      timestamp: new Date().toISOString(),
+      path: request.url,
+      error: message,
+    });
   }
 }

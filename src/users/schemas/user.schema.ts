@@ -27,9 +27,6 @@ export class User extends Document {
     select: false,
   })
   password: string;
-
-
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

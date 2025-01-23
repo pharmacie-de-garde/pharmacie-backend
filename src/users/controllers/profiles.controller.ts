@@ -1,4 +1,11 @@
-import { Controller, Get, Put, Body, Param, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Put,
+  Body,
+  Param,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TransformInterceptor } from '../../common/interceptors/transform.interceptor';
 import { ProfileService } from '../providers/profile.service';
@@ -31,9 +38,14 @@ export class ProfilesController {
     type: Profile,
   })
   @ApiResponse({ status: 404, description: 'Profile not found.' })
-  async updateProfile(@Param('userId') userId: string, @Body() updateProfileDto: UpdateProfileDto): Promise<Profile> {
-    const profile = await this.profileService.updateProfile(userId, updateProfileDto);
+  async updateProfile(
+    @Param('userId') userId: string,
+    @Body() updateProfileDto: UpdateProfileDto,
+  ): Promise<Profile> {
+    const profile = await this.profileService.updateProfile(
+      userId,
+      updateProfileDto,
+    );
     return profile;
   }
-
 }
